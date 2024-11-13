@@ -16,6 +16,11 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
+// https://github.com/flyway/flyway/issues/3811#issuecomment-1948012370
+tasks.shadowJar {
+    mergeServiceFiles()
+}
+
 repositories {
     mavenCentral()
 }
