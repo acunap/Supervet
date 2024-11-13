@@ -17,5 +17,5 @@ fun Application.configureMigrations() {
         driverClassName = "org.postgresql.Driver"
     }
 
-    Flyway.configure().loggers("slf4j").dataSource(HikariDataSource(hikariConfig)).load().migrate()
+    Flyway.configure().validateMigrationNaming(true).loggers("slf4j").dataSource(HikariDataSource(hikariConfig)).load().migrate()
 }
