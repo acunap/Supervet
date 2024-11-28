@@ -2,6 +2,7 @@ package com.supervet.auth.clients.sign_up
 
 import com.supervet.ktor.Handler
 import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -15,6 +16,7 @@ class AddClientHandler(private val clientSignUp: ClientSignUp) : Handler {
             clientSignUp(clientSignUpRequest)
             ctx.call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {
+            ctx.application.log.error(e.stackTraceToString())
             when (e) {
                 is ClientAlreadyExistsException -> ctx.call.respond(HttpStatusCode.Conflict)
                 is ClinicDoesNotExistException -> ctx.call.respond(HttpStatusCode.NotFound)
